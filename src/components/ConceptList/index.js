@@ -1,5 +1,6 @@
 import React from 'react';
-import './styles.css'
+import './styles.css';
+import Concept from '../Concept';
 
 const ConceptList = ({ concepts }) => {
 
@@ -7,7 +8,7 @@ const ConceptList = ({ concepts }) => {
       if(concepts) {
         return Object.keys(concepts).map((concept, i) => {
           return (
-            <li key={i}>{concept}</li>
+            <Concept concept={concept} key={i}/>
           )
         })
       } else {
@@ -15,7 +16,6 @@ const ConceptList = ({ concepts }) => {
       }
     }
 
-    console.log(displayConcepts);
     return (
       <section className="concept-list">
         <ul>

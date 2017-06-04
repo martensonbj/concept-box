@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import Form from '../Form'
+import Form from '../Form';
+import AdminControls from '../AdminControls';
 import ConceptList from '../ConceptList'
-import firebase from '../../firebase';
+import firebase, { signIn, signOut, provider } from '../../firebase';
 import './styles.css';
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
-      concepts: {}
+      concepts: {},
+      user: null
     }
   }
 
@@ -36,11 +38,18 @@ class App extends Component {
     }
   }
 
+  attemptSignIn(creds) {
+    signIn(creds)
+    .then(res => this.setState({ user: res.uid }))
+    .catch(err => this.setState({ user: null }))
+
+  }
 
   render() {
 
     return (
       <div className="App">
+        <AdminControls signIn={this.attemptSignIn.bind(this)}/>
         <Form handleClick={ (concept) => this.saveConcept(concept) } />
         <ConceptList concepts={ this.state.concepts } />
       </div>

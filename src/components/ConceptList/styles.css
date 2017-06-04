@@ -6,10 +6,10 @@
 ul {
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 50%;
 }
 
-li{
+li {
   list-style-type: none;
   padding: 20px;
   background-color: #f4f4f4;
