@@ -8,7 +8,7 @@ form {
   text-align: center;
 }
 
-input[type="text"] {
+.concept-input {
     border: none;
     border-radius: 3px;
     font-size: 30px;
@@ -18,27 +18,27 @@ input[type="text"] {
     width: 50%;
 }
 
-input[type="text"]:focus {
+.concept-input:focus {
   outline: none;
   box-shadow: 0 0 1pt 1pt #00ecec;
 }
-input[type="text"]::placeholder {
+.concept-input::placeholder {
   color: #b5b5b5;
 }
-input[type="text"]::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+.concept-input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: #b5b5b5;
 }
-input[type="text"]::-moz-placeholder { /* Firefox 19+ */
+.concept-input::-moz-placeholder { /* Firefox 19+ */
   color: #b5b5b5;
 }
-input[type="text"]:-ms-input-placeholder { /* IE 10+ */
+.concept-input:-ms-input-placeholder { /* IE 10+ */
   color: #b5b5b5;
 }
-input[type="text"]:-moz-placeholder { /* Firefox 18- */
+.concept-input:-moz-placeholder { /* Firefox 18- */
   color: #b5b5b5;
 }
 
-input[type="submit"] {
+.concept-submit {
   background: #fff;
   border: 1px solid #e2e2e2;
   border-radius: 3px;
@@ -49,6 +49,7 @@ input[type="submit"] {
 }
 
 .btn-enabled:hover {
+
   cursor: pointer;
   border: 1px solid #aaa;
 }

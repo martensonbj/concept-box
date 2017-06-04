@@ -1,0 +1,23 @@
+.concept-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  align-items: baseline;
+  position: relative;
+}
+
+.concept-rating {
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+}
+
+.concept-slider {
+  margin-right: 5px;
+}
+
+.rating-display {
+  margin: 10px;
+  width: 20px;
+}

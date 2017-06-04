@@ -24,6 +24,7 @@ export default class Form extends Component {
       <form>
         <input  type="text"
                 placeholder="Concept"
+                className='concept-input'
                 value = { this.state.concept }
                 onChange = { e => this.setState({ concept: e.target.value }) }
         />
