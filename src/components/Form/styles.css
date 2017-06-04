@@ -48,11 +48,17 @@ form {
   top: 20px;
 }
 
-.concept-submit:hover {
+.btn-enabled:hover {
+
   cursor: pointer;
   border: 1px solid #aaa;
 }
 
-.concept-submit:focus {
+.btn-disabled:hover {
+  cursor: not-allowed;
+  border: 1px solid #e2e2e2;
+}
+
+input[type="submit"]:focus {
   outline: none;
 }
