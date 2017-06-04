@@ -3,3 +3,11 @@ body {
   margin: 0;
   padding: 0;
 }
+
+input {
+  border: none;
+  font-weight: 100;
+  margin: 5px 0;
+  text-align: center;
+  padding: 10px;
+}

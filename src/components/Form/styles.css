@@ -22,23 +22,28 @@ form {
   outline: none;
   box-shadow: 0 0 1pt 1pt #00ecec;
 }
+
 .concept-input::placeholder {
   color: #b5b5b5;
 }
+
 .concept-input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: #b5b5b5;
 }
+
 .concept-input::-moz-placeholder { /* Firefox 19+ */
   color: #b5b5b5;
 }
+
 .concept-input:-ms-input-placeholder { /* IE 10+ */
   color: #b5b5b5;
 }
+
 .concept-input:-moz-placeholder { /* Firefox 18- */
   color: #b5b5b5;
 }
 
-.concept-submit {
+input[type="submit"] {
   background: #fff;
   border: 1px solid #e2e2e2;
   border-radius: 3px;
@@ -48,8 +53,11 @@ form {
   top: 20px;
 }
 
-.btn-enabled:hover {
+input[type="submit"]:focus {
+  outline: none;
+}
 
+.btn-enabled:hover {
   cursor: pointer;
   border: 1px solid #aaa;
 }

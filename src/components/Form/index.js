@@ -20,6 +20,7 @@ export default class Form extends Component {
       'btn-enabled': this.state.concept !== '',
       'btn-disabled': this.state.concept === ''
     })
+    
     return (
       <form>
         <input  type="text"
