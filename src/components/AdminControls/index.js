@@ -7,15 +7,52 @@ export default class AdminControls extends Component {
     this.state = {
       email: '',
       password: '',
+      showForm: false
     }
   }
 
+  signOut() {
+    signOut
+    this.setState({ showForm: false })
+  }
+
   render() {
+    const { showForm } = this.state;
+    const { signIn, signOut, user } = this.props;
+
+    const adminView = () => {
+      if(!user) {
+        if(showForm) {
+          return (
+            <div>
+              <input type='text' onChange={(e) => this.setState({ email: e.target.value })}/>
+              <input type='password' onChange={(e) => this.setState({ password: e.target.value })}/>
+              <button onClick={ () => signIn(this.state) }>Sign In</button>
+            </div>
+          )
+        }
+      } else if (user && showForm) {
+        return (
+          <div>
+            <h3>Logged in as {user.email}</h3>
+            <button onClick={() => this.signOut()}>Sign Out</button>
+          </div>
+        )
+      }
+    }
+
+    const toggleShowForm = () => {
+      if(!this.state.showForm) {
+        return (
+          <button onClick={() => this.setState({ showForm: true })}>Admin Login</button>
+        )
+      }
+    }
+
     return (
       <div className='admin-container'>
-        <input type='text' onChange={(e) => this.setState({ email: e.target.value })}/>
-        <input type='password' onChange={(e) => this.setState({ password: e.target.value })}/>
-        <button onClick={ () => this.props.signIn(this.state) }>Sign In</button>
+        {toggleShowForm()}
+        {adminView()}
       </div>
     )
   }

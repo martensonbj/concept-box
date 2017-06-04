@@ -39,19 +39,30 @@ class App extends Component {
   }
 
   attemptSignIn(creds) {
-    signIn(creds)
-    .then(res => this.setState({ user: res.uid }))
-    .catch(err => this.setState({ user: null }))
+    signIn(creds.email, creds.password)
+      .then(res => {
+        const user = { email: res.email, id: res.uid }
+        this.setState({ user })
+      })
+      .catch(err => this.setState({ user: null }))
+  }
 
+  signOutUser() {
+    signOut
+    this.setState({ user: null })
   }
 
   render() {
+    const { user, concepts } = this.state;
 
     return (
       <div className="App">
-        <AdminControls signIn={this.attemptSignIn.bind(this)}/>
+        <AdminControls user={user}
+                       signIn={this.attemptSignIn.bind(this)}
+                       signOut={this.signOutUser.bind(this)}
+                       />
         <Form handleClick={ (concept) => this.saveConcept(concept) } />
-        <ConceptList concepts={ this.state.concepts } />
+        <ConceptList concepts={ concepts } />
       </div>
     );
   }

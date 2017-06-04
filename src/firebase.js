@@ -21,16 +21,8 @@ export default firebase;
 
 let currentUser = null;
 
-export const signIn = (creds) => {
-  const { email, password } = creds
-
-
+export const signIn = (email, password) => {
   return auth.signInWithEmailAndPassword(email, password)
-    // .catch(error => {
-    //   console.log('error ', error);
-    //   const errorCode = error.code;
-    //   const errorMessage = error.message;
-    // });
 }
 
 export const signOut = auth.signOut().then(() => {
