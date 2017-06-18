@@ -35,7 +35,6 @@ export default class AdminControls extends Component {
           )
         }
       } else if (user && showForm) {
-        console.log(user);
         return (
           <div>
             <h3>Logged in as {user.email}</h3>

@@ -47,11 +47,6 @@ class App extends Component {
       .catch(err => this.setState({ user: null }))
   }
 
-  signOutUser() {
-    console.log('hit');
-    this.setState({ user: null })
-  }
-
   render() {
     const { user, concepts } = this.state;
 
@@ -67,7 +62,7 @@ class App extends Component {
       <div className="App">
         <AdminControls user={user}
                        signIn={this.attemptSignIn.bind(this)}
-                       signOut={this.signOutUser.bind(this)}
+                       signOut={() => this.setState({ user: null })}
                        />
         {toggleForm()}
         <ConceptList concepts={ concepts } />
