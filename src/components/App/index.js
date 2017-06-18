@@ -55,13 +55,19 @@ class App extends Component {
   render() {
     const { user, concepts } = this.state;
 
+    const toggleForm = () => {
+      if(user) {
+        return <Form handleClick={ (concept) => this.saveConcept(concept) } user={user}/>
+      }
+    }
+
     return (
       <div className="App">
         <AdminControls user={user}
                        signIn={this.attemptSignIn.bind(this)}
                        signOut={this.signOutUser.bind(this)}
                        />
-        <Form handleClick={ (concept) => this.saveConcept(concept) } />
+        {toggleForm()}
         <ConceptList concepts={ concepts } />
       </div>
     );

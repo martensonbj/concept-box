@@ -7,7 +7,8 @@ export default class AdminControls extends Component {
     this.state = {
       email: '',
       password: '',
-      showForm: false
+      showForm: false,
+      user: null
     }
   }
 
@@ -32,6 +33,7 @@ export default class AdminControls extends Component {
           )
         }
       } else if (user && showForm) {
+        console.log(user);
         return (
           <div>
             <h3>Logged in as {user.email}</h3>
