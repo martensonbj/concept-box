@@ -48,7 +48,7 @@ class App extends Component {
   }
 
   signOutUser() {
-    signOut
+    console.log('hit');
     this.setState({ user: null })
   }
 
@@ -58,6 +58,8 @@ class App extends Component {
     const toggleForm = () => {
       if(user) {
         return <Form handleClick={ (concept) => this.saveConcept(concept) } user={user}/>
+      } else {
+        return null
       }
     }
 

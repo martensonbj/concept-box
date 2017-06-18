@@ -14,7 +14,9 @@ export default class AdminControls extends Component {
 
   signOut() {
     signOut
-    this.setState({ showForm: false })
+    this.setState({ showForm: false }, () => {
+      this.props.signOut()
+    })
   }
 
   render() {
