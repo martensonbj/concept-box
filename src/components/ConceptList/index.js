@@ -21,6 +21,7 @@ const ConceptList = ({ concepts }) => {
         <ul>
           { displayConcepts() }
         </ul>
+        <button>Submit Survey</button>
       </section>
     )
 }

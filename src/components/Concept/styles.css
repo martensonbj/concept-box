@@ -5,6 +5,8 @@
   width: 100%;
   align-items: baseline;
   position: relative;
+  margin: 2px;
+  padding: 20px;
 }
 
 .concept-rating {

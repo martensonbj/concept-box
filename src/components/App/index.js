@@ -52,7 +52,7 @@ class App extends Component {
 
     const toggleForm = () => {
       if(user) {
-        return <Form handleClick={ (concept) => this.saveConcept(concept) } user={user}/>
+        return <Form handleClick={ (concept) => this.saveConcept(concept) } user={ user }/>
       } else {
         return null
       }
@@ -60,11 +60,11 @@ class App extends Component {
 
     return (
       <div className="App">
-        <AdminControls user={user}
-                       signIn={this.attemptSignIn.bind(this)}
-                       signOut={() => this.setState({ user: null })}
+        <AdminControls user={ user }
+                       signIn={ this.attemptSignIn.bind(this) }
+                       signOut={ () => this.setState({ user: null }) }
                        />
-        {toggleForm()}
+        { toggleForm() }
         <ConceptList concepts={ concepts } />
       </div>
     );
