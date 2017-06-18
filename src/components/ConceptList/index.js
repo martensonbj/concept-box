@@ -2,13 +2,15 @@ import React from 'react';
 import './styles.css';
 import Concept from '../Concept';
 
-const ConceptList = ({ concepts, updateRatings, submitRatings }) => {
+const ConceptList = ({ concepts, updateRatings, submitRatings, formComplete }) => {
 
     const displayConcepts = () => {
-      if(concepts) {
+      if (concepts) {
         return Object.keys(concepts).map((concept, i) => {
           return (
-            <Concept concept={concept} key={i} updateRatings={updateRatings} />
+            <Concept concept={ concept }
+                     key={i}
+                     updateRatings={ updateRatings } />
           )
         })
       } else {
@@ -21,7 +23,8 @@ const ConceptList = ({ concepts, updateRatings, submitRatings }) => {
         <ul>
           { displayConcepts() }
         </ul>
-        <button onClick={ submitRatings }>Submit Survey</button>
+        <button onClick={ submitRatings }
+                disabled={ formComplete }>Submit Survey</button>
       </section>
     )
 }

@@ -11,8 +11,10 @@ class App extends Component {
     this.state = {
       concepts: {},
       ratings: {},
+      conceptsMarked: 0,
       user: null
     }
+
   }
 
   componentDidMount() {
@@ -50,7 +52,11 @@ class App extends Component {
 
   updateRatings(rating) {
     const newState = Object.assign({}, this.state.ratings, rating)
-    this.setState({ ratings: newState })
+    const newCount = this.state.conceptsMarked + 1
+    this.setState({
+      ratings: newState,
+      conceptsMarked: newCount
+    })
   }
 
   submitRatings() {
@@ -61,8 +67,19 @@ class App extends Component {
     })
   }
 
+  formComplete() {
+    const { conceptsMarked, concepts } = this.state;
+    const numOfConcepts = Object.keys(concepts).length
+
+    if (conceptsMarked === numOfConcepts) {
+      return false
+    } else {
+      return true
+    }
+  }
+
   render() {
-    const { user, concepts } = this.state;
+    const { user, concepts, formComplete } = this.state;
 
     const toggleForm = () => {
       if(user) {
@@ -79,7 +96,10 @@ class App extends Component {
                        signOut={ () => this.setState({ user: null }) }
                        />
         { toggleForm() }
-        <ConceptList concepts={ concepts } updateRatings={ this.updateRatings.bind(this) } submitRatings={ this.submitRatings.bind(this) } />
+        <ConceptList concepts={ concepts }
+                     updateRatings={ this.updateRatings.bind(this) }
+                     submitRatings={ this.submitRatings.bind(this) }
+                     formComplete={ this.formComplete() } />
       </div>
     );
   }

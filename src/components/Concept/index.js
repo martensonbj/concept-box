@@ -28,8 +28,8 @@ export default class Concept extends Component {
                    className='concept-slider'
                    value={ rating }
                    onChange={ (e) => this.setState({ rating: parseInt(e.target.value) }) }
-                   onMouseUp={() => this.updateRatings()}
-                   onMouseDown={() => this.setState({ changed: true })} />
+                   onMouseUp={ () => this.updateRatings() }
+                   onMouseDown={ () => this.setState({ changed: true }) } />
               <div className='rating-display'>{ rating }</div>
           </div>
         </li>
