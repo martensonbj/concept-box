@@ -10,6 +10,7 @@ class App extends Component {
     super()
     this.state = {
       concepts: {},
+      ratings: {},
       user: null
     }
   }
@@ -47,6 +48,19 @@ class App extends Component {
       .catch(err => this.setState({ user: null }))
   }
 
+  updateRatings(rating) {
+    const newState = Object.assign({}, this.state.ratings, rating)
+    this.setState({ ratings: newState })
+  }
+
+  submitRatings() {
+    const ratingKeys = Object.keys(this.state.ratings);
+    ratingKeys.forEach(key => {
+      const newRating = this.state.ratings[key]
+      this.state.concepts[key].push(newRating)
+    })
+  }
+
   render() {
     const { user, concepts } = this.state;
 
@@ -65,7 +79,7 @@ class App extends Component {
                        signOut={ () => this.setState({ user: null }) }
                        />
         { toggleForm() }
-        <ConceptList concepts={ concepts } />
+        <ConceptList concepts={ concepts } updateRatings={ this.updateRatings.bind(this) } submitRatings={ this.submitRatings.bind(this) } />
       </div>
     );
   }
