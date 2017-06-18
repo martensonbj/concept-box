@@ -2,7 +2,7 @@ import React from 'react';
 import './styles.css';
 import Concept from '../Concept';
 
-const ConceptList = ({ concepts, updateRatings, submitRatings, formComplete }) => {
+const ConceptList = ({ concepts, updateRatings, submitRatings, formComplete, updateCount }) => {
 
     const displayConcepts = () => {
       if (concepts) {
@@ -10,7 +10,8 @@ const ConceptList = ({ concepts, updateRatings, submitRatings, formComplete }) =
           return (
             <Concept concept={ concept }
                      key={i}
-                     updateRatings={ updateRatings } />
+                     updateRatings={ updateRatings }
+                     updateCount={ updateCount }/>
           )
         })
       } else {

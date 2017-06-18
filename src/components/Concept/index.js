@@ -11,7 +11,12 @@ export default class Concept extends Component {
   }
 
   updateRatings() {
-    this.props.updateRatings({ [this.props.concept]: this.state.rating })
+    if (!this.state.changed) {
+      this.props.updateCount()
+    }
+    this.setState({ changed: true }, () => {
+      this.props.updateRatings({ [this.props.concept]: this.state.rating })
+    })
   }
 
   render() {
@@ -28,8 +33,8 @@ export default class Concept extends Component {
                    className='concept-slider'
                    value={ rating }
                    onChange={ (e) => this.setState({ rating: parseInt(e.target.value) }) }
-                   onMouseUp={ () => this.updateRatings() }
-                   onMouseDown={ () => this.setState({ changed: true }) } />
+                   onMouseUp={ () => this.updateRatings() } />
+                   {/* onMouseDown={ () =>  } /> */}
               <div className='rating-display'>{ rating }</div>
           </div>
         </li>

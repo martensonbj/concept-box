@@ -36,9 +36,13 @@ class App extends Component {
 
       this.setState({ concepts: newState }, () => {
         let objectToUpdate = this.state.concepts
-        firebase.database().ref('concepts').set(JSON.stringify(objectToUpdate))
+        this.updateFirebase(objectToUpdate)
       })
     }
+  }
+
+  updateFirebase(updatedObject) {
+    firebase.database().ref('concepts').set(JSON.stringify(updatedObject))
   }
 
   attemptSignIn(creds) {
@@ -52,19 +56,25 @@ class App extends Component {
 
   updateRatings(rating) {
     const newState = Object.assign({}, this.state.ratings, rating)
+    this.setState({ ratings: newState })
+  }
+
+  updateCount() {
     const newCount = this.state.conceptsMarked + 1
-    this.setState({
-      ratings: newState,
-      conceptsMarked: newCount
-    })
+    this.setState({ conceptsMarked: newCount })
   }
 
   submitRatings() {
-    const ratingKeys = Object.keys(this.state.ratings);
+    const { ratings, concepts } = this.state;
+    const ratingKeys = Object.keys(ratings);
+    const updatedConcepts = Object.assign({}, concepts)
+
     ratingKeys.forEach(key => {
-      const newRating = this.state.ratings[key]
-      this.state.concepts[key].push(newRating)
+      const newRating = ratings[key]
+      updatedConcepts[key].push(newRating)
     })
+
+    this.updateFirebase(updatedConcepts)
   }
 
   formComplete() {
@@ -99,7 +109,8 @@ class App extends Component {
         <ConceptList concepts={ concepts }
                      updateRatings={ this.updateRatings.bind(this) }
                      submitRatings={ this.submitRatings.bind(this) }
-                     formComplete={ this.formComplete() } />
+                     formComplete={ this.formComplete() }
+                     updateCount={ this.updateCount.bind(this) }/>
       </div>
     );
   }
