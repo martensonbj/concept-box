@@ -12,7 +12,8 @@ class App extends Component {
       concepts: {},
       ratings: {},
       conceptsMarked: 0,
-      user: null
+      user: null,
+      error: false
     }
 
   }
@@ -51,7 +52,11 @@ class App extends Component {
         const user = { email: res.email, id: res.uid }
         this.setState({ user })
       })
-      .catch(err => this.setState({ user: null }))
+      .catch(err => this.signInError())
+  }
+
+  signInError() {
+    this.setState({ user: null, error: true })
   }
 
   updateRatings(rating) {
@@ -89,7 +94,7 @@ class App extends Component {
   }
 
   render() {
-    const { user, concepts, formComplete } = this.state;
+    const { user, concepts, formComplete, error } = this.state;
 
     const toggleForm = () => {
       if(user) {
@@ -99,13 +104,22 @@ class App extends Component {
       }
     }
 
+    const signInError = () => {
+      if(error) {
+        return <div className='signIn-error'>Password and/or email inccorect, please try again.</div>
+      }
+    }
+
     return (
       <div className="App">
         <AdminControls user={ user }
                        signIn={ this.attemptSignIn.bind(this) }
                        signOut={ () => this.setState({ user: null }) }
-                       />
+                       resetInput={ () => this.setState({ error: false }) }
+                       error={ signInError() }/>
+
         { toggleForm() }
+
         <ConceptList concepts={ concepts }
                      updateRatings={ this.updateRatings.bind(this) }
                      submitRatings={ this.submitRatings.bind(this) }
