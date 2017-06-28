@@ -128,7 +128,7 @@ class App extends Component {
     const resultsView = () => {
       return (
         <div>
-          <Results />
+          <Results concepts={concepts}/>
         </div>
       )
     }
@@ -140,7 +140,6 @@ class App extends Component {
         )
       }
     }
-
 
     return (
       <div className="App">
