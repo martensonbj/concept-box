@@ -9,13 +9,21 @@ export default class AdminControls extends Component {
     this.state = {
       email: '',
       password: '',
-      showForm: false
+      showForm: false,
+      user: null
     }
   }
 
   signOut() {
     signOut
-    this.setState({ showForm: false })
+    this.setState({ showForm: false }, () => {
+      this.props.signOut()
+    })
+  }
+
+  updateInput(e, field) {
+    this.setState({ [field]: e.target.value })
+    this.props.resetInput()
   }
 
   handleLogin() {
