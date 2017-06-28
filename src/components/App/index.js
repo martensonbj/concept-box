@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Form from '../Form';
 import AdminControls from '../AdminControls';
 import ConceptList from '../ConceptList'
+import Results from '../Results'
 import firebase, { signIn, signOut, provider } from '../../firebase';
 import './styles.css';
 
@@ -13,9 +14,9 @@ class App extends Component {
       ratings: {},
       conceptsMarked: 0,
       user: null,
-      error: false
+      error: false,
+      showResults: false
     }
-
   }
 
   componentDidMount() {
@@ -94,7 +95,7 @@ class App extends Component {
   }
 
   render() {
-    const { user, concepts, formComplete, error } = this.state;
+    const { user, concepts, formComplete, error, showResults } = this.state;
 
     const toggleForm = () => {
       if(user) {
@@ -110,21 +111,50 @@ class App extends Component {
       }
     }
 
+    const conceptView = () => {
+      return (
+        <div>
+          { toggleForm() }
+
+          <ConceptList concepts={ concepts }
+            updateRatings={ this.updateRatings.bind(this) }
+            submitRatings={ this.submitRatings.bind(this) }
+            formComplete={ this.formComplete() }
+            updateCount={ this.updateCount.bind(this) }/>
+        </div>
+      )
+    }
+
+    const resultsView = () => {
+      return (
+        <div>
+          <Results />
+        </div>
+      )
+    }
+
+    const toggleViewButton = () => {
+      if (user) {
+        return (
+          <button onClick={() => this.setState({ showResults: !showResults}) }>Show { showResults ? 'Results' : 'Concept Form' }</button>
+        )
+      }
+    }
+
+
     return (
       <div className="App">
+
+        {toggleViewButton()}
+
         <AdminControls user={ user }
                        signIn={ this.attemptSignIn.bind(this) }
                        signOut={ () => this.setState({ user: null }) }
                        resetInput={ () => this.setState({ error: false }) }
                        error={ signInError() }/>
 
-        { toggleForm() }
+      { showResults ? resultsView() : conceptView() }
 
-        <ConceptList concepts={ concepts }
-                     updateRatings={ this.updateRatings.bind(this) }
-                     submitRatings={ this.submitRatings.bind(this) }
-                     formComplete={ this.formComplete() }
-                     updateCount={ this.updateCount.bind(this) }/>
       </div>
     );
   }
