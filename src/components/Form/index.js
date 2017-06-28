@@ -5,7 +5,9 @@ import './styles.css';
 export default class Form extends Component {
   constructor() {
     super()
-    this.state = { concept: '' }
+    this.state = {
+      concept: ''
+    }
   }
 
   handleClick(e) {
@@ -15,12 +17,11 @@ export default class Form extends Component {
   }
 
   render() {
-
     let btnStyles = cn({
       'btn-enabled': this.state.concept !== '',
       'btn-disabled': this.state.concept === ''
     })
-    
+
     return (
       <form>
         <input  type="text"
