@@ -35,43 +35,38 @@ export default class AdminControls extends Component {
     const { showForm } = this.state;
     const { signIn, signOut, user } = this.props;
 
-    const adminView = () => {
-      if(!user) {
-        if(showForm) {
-          return (
-            <div className="adminForm">
-              <button
-                className="close-form"
-                onClick={ () => this.setState({ showForm: false }) }
-              >
-                x
-              </button>
-              <input
-                type='text'
-                placeholder="email"
-                onChange={ (e) => this.setState({ email: e.target.value }) }/>
-              <input
-                type='password'
-                placeholder="password"
-                onChange={ (e) => this.setState({ password: e.target.value }) }/>
-              <button onClick={ () => this.handleLogin() }>Sign In</button>
-            </div>
-          )
-        }
-      } else if (user && !showForm) {
-        return (
-          <div>
-            <p>Logged in as { user.email }</p>
-            <button onClick={ () => this.signOut() }>Sign Out</button>
-          </div>
-        )
-      }
+    const loginForm = () => {
+      return (
+        <div className="adminForm">
+          <button
+            className="close-form"
+            onClick={ () => this.setState({ showForm: false }) }
+          >
+            x
+          </button>
+          <input
+            type='text'
+            placeholder="email"
+            onChange={ (e) => this.setState({ email: e.target.value }) }/>
+          <input
+            type='password'
+            placeholder="password"
+            onChange={ (e) => this.setState({ password: e.target.value }) }/>
+          <button onClick={ () => this.handleLogin() }>Sign In</button>
+        </div>
+      )
     }
 
-    const toggleShowForm = () => {
-      if(!this.state.showForm) {
+    const toggleLoginControls = () => {
+      if(!user) {
         return (
-          <button className="admin-login" onClick={ () => this.setState({ showForm: true }) }>Admin Login</button>
+            <button className="admin-login" onClick={ () => this.setState({ showForm: true }) }>Admin Login</button>
+        )
+      }
+
+      if(user) {
+        return (
+            <button onClick={ () => this.signOut() }>Sign Out</button>
         )
       }
     }
@@ -82,8 +77,10 @@ export default class AdminControls extends Component {
 
     return (
       <div className={ adminStyles }>
-        { toggleShowForm() }
-        { adminView() }
+        <div className="login-controls">
+          { toggleLoginControls() }
+        </div>
+        { showForm ? loginForm() : null }
       </div>
     )
   }

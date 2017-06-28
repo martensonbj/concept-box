@@ -18,6 +18,15 @@
     top: 150px;
 }
 
+.login-controls {
+  position: absolute;
+  right: 5px;
+}
+
+.login-controls  button {
+  width: 100px;
+}
+
 button {
     border: none;
     background: white;
@@ -29,13 +38,6 @@ button {
 
 button:hover {
   cursor: pointer;
-}
-
-button.admin-login {
-    position: absolute;
-    right: 5px;
-    margin-left: 5px;
-    padding: 5px;
 }
 
 button.close-form {
