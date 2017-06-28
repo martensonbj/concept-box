@@ -7,13 +7,21 @@ export default class AdminControls extends Component {
     this.state = {
       email: '',
       password: '',
-      showForm: false
+      showForm: false,
+      user: null
     }
   }
 
   signOut() {
     signOut
-    this.setState({ showForm: false })
+    this.setState({ showForm: false }, () => {
+      this.props.signOut()
+    })
+  }
+
+  updateInput(e, field) {
+    this.setState({ [field]: e.target.value })
+    this.props.resetInput()
   }
 
   render() {
@@ -25,17 +33,18 @@ export default class AdminControls extends Component {
         if(showForm) {
           return (
             <div>
-              <input type='text' onChange={(e) => this.setState({ email: e.target.value })}/>
-              <input type='password' onChange={(e) => this.setState({ password: e.target.value })}/>
+              <input type='text' onChange={ (e) => this.updateInput(e, 'email') }/>
+              <input type='password' onChange={(e) => this.updateInput(e, 'password') }/>
               <button onClick={ () => signIn(this.state) }>Sign In</button>
+              { this.props.error }
             </div>
           )
         }
       } else if (user && showForm) {
         return (
           <div>
-            <h3>Logged in as {user.email}</h3>
-            <button onClick={() => this.signOut()}>Sign Out</button>
+            <h3>Logged in as { user.email }</h3>
+            <button onClick={ () => this.signOut() }>Sign Out</button>
           </div>
         )
       }
@@ -44,15 +53,15 @@ export default class AdminControls extends Component {
     const toggleShowForm = () => {
       if(!this.state.showForm) {
         return (
-          <button onClick={() => this.setState({ showForm: true })}>Admin Login</button>
+          <button onClick={ () => this.setState({ showForm: true }) }>Admin Login</button>
         )
       }
     }
 
     return (
       <div className='admin-container'>
-        {toggleShowForm()}
-        {adminView()}
+        { toggleShowForm() }
+        { adminView() }
       </div>
     )
   }
