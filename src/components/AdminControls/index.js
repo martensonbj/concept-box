@@ -26,6 +26,11 @@ export default class AdminControls extends Component {
     this.props.resetInput()
   }
 
+  handleLogin() {
+    this.props.signIn(this.state.email, this.state.password)
+    this.setState({ showForm: false })
+  }
+
   render() {
     const { showForm } = this.state;
     const { signIn, signOut, user } = this.props;
@@ -34,18 +39,29 @@ export default class AdminControls extends Component {
       if(!user) {
         if(showForm) {
           return (
-            <div>
-              <input type='text' onChange={ (e) => this.updateInput(e, 'email') }/>
-              <input type='password' onChange={(e) => this.updateInput(e, 'password') }/>
-              <button onClick={ () => signIn(this.state) }>Sign In</button>
-              { this.props.error }
+            <div className="adminForm">
+              <button
+                className="close-form"
+                onClick={ () => this.setState({ showForm: false }) }
+              >
+                x
+              </button>
+              <input
+                type='text'
+                placeholder="email"
+                onChange={ (e) => this.setState({ email: e.target.value }) }/>
+              <input
+                type='password'
+                placeholder="password"
+                onChange={ (e) => this.setState({ password: e.target.value }) }/>
+              <button onClick={ () => this.handleLogin() }>Sign In</button>
             </div>
           )
         }
-      } else if (user && showForm) {
+      } else if (user && !showForm) {
         return (
           <div>
-            <h3>Logged in as { user.email }</h3>
+            <p>Logged in as { user.email }</p>
             <button onClick={ () => this.signOut() }>Sign Out</button>
           </div>
         )

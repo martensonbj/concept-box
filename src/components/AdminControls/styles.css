@@ -37,3 +37,24 @@ button.admin-login {
     margin-left: 5px;
     padding: 5px;
 }
+
+button.close-form {
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.46);
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    font-size: 30px;
+    font-weight: 100;
+    display: flex;
+    justify-content: center;
+    padding: 0px;
+    color: rgba(255,255,255,0.5);
+    margin-left: 100%;
+    margin-bottom: 10px;
+}
+
+button.close-form:hover {
+  color: rgba(255,255,255,1);
+  border: 1px solid rgba(255, 255, 255, 1);
+}
