@@ -38,8 +38,8 @@ class App extends Component {
     }
   }
 
-  attemptSignIn(creds) {
-    signIn(creds.email, creds.password)
+  attemptSignIn(email, password) {
+    signIn(email, password)
       .then(res => {
         const user = { email: res.email, id: res.uid }
         this.setState({ user })
