@@ -2,3 +2,8 @@
   color: red;
   font: sans-serif;
 }
+
+.show-results {
+  position: absolute;
+  left: 5px;
+}

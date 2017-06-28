@@ -136,7 +136,12 @@ class App extends Component {
     const toggleViewButton = () => {
       if (user) {
         return (
-          <button onClick={() => this.setState({ showResults: !showResults}) }>Show { showResults ? 'Results' : 'Concept Form' }</button>
+          <button
+            className="show-results"
+            onClick={ () => this.setState({ showResults: !showResults}) }
+          >
+              Show { showResults ? 'Results' : 'Concept Form' }
+          </button>
         )
       }
     }
